@@ -25,7 +25,6 @@ function MyChart() {
         entries.sort((a, b) => {
           return new Date(a[0]) - new Date(b[0]);
         });
-        console.log(entries);
 
         // Setamos o state para somente a data
         setDates(entries.map((currentArr) => currentArr[0]));
@@ -37,7 +36,7 @@ function MyChart() {
           entries.map((currentArr) => currentArr[1]["4. close"])
         );
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
     fetchData();
@@ -54,8 +53,7 @@ function MyChart() {
     // Preenchendo um novo gráfico com os valores atualizados
     const myChart = new Chart(ctx, {
       type: "line",
-      responsive: true,
-      maintainAspectRatio: false,
+      options: { responsive: true, maintainAspectRatio: false },
       data: {
         labels: dates,
         datasets: [
@@ -76,7 +74,7 @@ function MyChart() {
   }, [dates, closingPrices]);
 
   return (
-    <div style={{ position: "relative", height: "30vh" }}>
+    <div style={{ position: "relative", height: "600px" }}>
       <canvas id="myChart" width="400" height="400"></canvas>
     </div>
   );
